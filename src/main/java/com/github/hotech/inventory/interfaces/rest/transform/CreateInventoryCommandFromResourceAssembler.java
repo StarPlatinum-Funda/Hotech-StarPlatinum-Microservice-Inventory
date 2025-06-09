@@ -5,6 +5,7 @@ import com.github.hotech.inventory.interfaces.rest.resources.CreateInventoryReso
 
 public class CreateInventoryCommandFromResourceAssembler {
     public static CreateItemsCommand toCommandFromResource(CreateInventoryResource resource){
-        return new CreateItemsCommand(resource.productTitle(), resource.productDescription(), resource.Quantity(), resource.Brand());
+        return new CreateItemsCommand(resource.productTitle(), resource.brandName(), resource.productDescription(), resource.Quantity(),
+                resource.rechargeLimit(), resource.providerId(), resource.warehouseId());
     }
 }

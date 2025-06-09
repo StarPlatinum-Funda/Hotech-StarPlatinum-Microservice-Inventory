@@ -5,6 +5,7 @@ import com.github.hotech.inventory.interfaces.rest.resources.UpdateInventoryReso
 
 public class UpdateInventoryCommandFromResourceAssembler {
     public static UpdateInventoryCommand toCommandFromResource(Long inventoryId, UpdateInventoryResource resource){
-        return new UpdateInventoryCommand(inventoryId, resource.productTitle(), resource.productDescription(), resource.Quantity(), resource.Brand());
+        return new UpdateInventoryCommand(inventoryId, resource.productTitle(), resource.brandName(), resource.productDescription(),
+                resource.Quantity(), resource.rechargeLimit(), resource.providerId(), resource.warehouseId());
     }
 }

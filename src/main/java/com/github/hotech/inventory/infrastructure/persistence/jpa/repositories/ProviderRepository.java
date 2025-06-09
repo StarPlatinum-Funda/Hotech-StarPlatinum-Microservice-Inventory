@@ -7,4 +7,6 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface ProviderRepository extends JpaRepository<Provider, Long> {
     boolean existsByRuc(String ruc);
+
+    boolean existsByRucAndIdNot(String ruc, Long id);
 }

@@ -25,6 +25,14 @@ public class InventoryCommandServiceImpl implements InventoryCommandService {
             throw new IllegalArgumentException("This item title already exists");
         }
 
+        if(command.itemQuantity() < 0){
+            throw new IllegalArgumentException("Quantity cannot be less than 0");
+        }
+
+        if(command.rechargeLimit() < 0){
+            throw new IllegalArgumentException("Recharge limit cannot be less than 0");
+        }
+
         var item = new Inventory(command);
         var createdItems = itemRepository.save(item);
         return Optional.of(createdItems);
@@ -33,6 +41,18 @@ public class InventoryCommandServiceImpl implements InventoryCommandService {
     @Override
     public Optional<Inventory> handle(UpdateInventoryCommand command)
     {
+        if(itemRepository.existsByProductTitleAndIdNot((command.itemTitle()), command.id())){
+            throw new IllegalArgumentException("This item title already exists");
+        }
+
+        if(command.itemQuantity() < 0){
+            throw new IllegalArgumentException("Quantity cannot be less than 0");
+        }
+
+        if(command.rechargeLimit() < 0){
+            throw new IllegalArgumentException("Recharge limit cannot be less than 0");
+        }
+
         var result = itemRepository.findById(command.id());
         if (result.isEmpty()) throw new IllegalArgumentException("Item does not exist");
         var inventoryToUpdate = result.get();

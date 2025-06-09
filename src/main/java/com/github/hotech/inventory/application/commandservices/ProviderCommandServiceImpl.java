@@ -32,6 +32,11 @@ public class ProviderCommandServiceImpl implements ProviderCommandService {
 
     @Override
     public Optional<Provider> handle(UpdateProviderCommand command) {
+
+        if(providerRepository.existsByRucAndIdNot(command.ruc(), command.id())) {
+            throw new IllegalArgumentException("This ruc already exists");
+        }
+
         var result = providerRepository.findById(command.id());
         if (result.isEmpty()) throw new IllegalArgumentException("Provider does not exist");
         var providerToUpdate = result.get();

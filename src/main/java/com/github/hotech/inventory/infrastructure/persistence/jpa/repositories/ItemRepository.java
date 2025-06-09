@@ -10,4 +10,6 @@ import java.util.List;
 public interface ItemRepository extends JpaRepository<Inventory, Long> {
     List<Inventory> findAllByBrandName(String brand);
     boolean existsByProductTitle(String itemName);
+
+    boolean existsByProductTitleAndIdNot(String productTitle, Long id);
 }

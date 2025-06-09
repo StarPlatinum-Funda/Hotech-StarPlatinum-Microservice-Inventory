@@ -25,8 +25,8 @@ public class OpenApiConfiguration {
         // General configuration
         var openApi = new OpenAPI();
         openApi.info(new Info()
-                        .title("Hotech Platform API")
-                        .description("Hotech application REST API documentation.")
+                        .title("Hotech Platform Inventory Microservice API")
+                        .description("Hotech application Inventory Microservice REST API documentation.")
                         .version("v1.0.0")
                         .license(new License().name("Apache 2.0")
                                 .url("https://springdoc.org")))

@@ -5,9 +5,11 @@ import com.github.hotech.inventory.domain.model.commands.CreateWarehouseCommand;
 import com.github.hotech.inventory.domain.model.commands.UpdateWarehouseCommand;
 import com.github.hotech.inventory.domain.services.WarehouseCommandService;
 import com.github.hotech.inventory.infrastructure.persistence.jpa.repositories.WarehouseRepository;
+import org.springframework.stereotype.Service;
 
 import java.util.Optional;
 
+@Service
 public class WarehouseCommandServiceImpl implements WarehouseCommandService {
 
     private final WarehouseRepository  warehouseRepository;

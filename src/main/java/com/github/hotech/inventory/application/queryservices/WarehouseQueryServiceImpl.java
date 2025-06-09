@@ -5,10 +5,12 @@ import com.github.hotech.inventory.domain.model.queries.GetAllWarehouseQuery;
 import com.github.hotech.inventory.domain.model.queries.GetWarehouseByIdQuery;
 import com.github.hotech.inventory.domain.services.WarehouseQueryService;
 import com.github.hotech.inventory.infrastructure.persistence.jpa.repositories.WarehouseRepository;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Optional;
 
+@Service
 public class WarehouseQueryServiceImpl implements WarehouseQueryService {
 
     private final WarehouseRepository warehouseRepository;

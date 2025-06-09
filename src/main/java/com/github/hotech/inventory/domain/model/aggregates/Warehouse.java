@@ -17,10 +17,12 @@ public class Warehouse extends AbstractAggregateRoot<Warehouse> {
     @Column(nullable = false)
     private Long userId;
 
-    protected Warehouse() {}
+    protected Warehouse() {
+
+    }
 
     public Warehouse(CreateWarehouseCommand command) {
-
+        userId = 0L;
     }
 
     public Warehouse updateWarehouse(UpdateWarehouseCommand command){
