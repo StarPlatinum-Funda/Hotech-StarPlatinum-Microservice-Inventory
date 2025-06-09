@@ -1,6 +1,8 @@
 package com.github.hotech.inventory.domain.services;
 
 import com.github.hotech.inventory.domain.model.aggregates.Inventory;
+import com.github.hotech.inventory.domain.model.aggregates.Provider;
+import com.github.hotech.inventory.domain.model.aggregates.Warehouse;
 import com.github.hotech.inventory.domain.model.queries.*;
 
 import java.util.List;
@@ -10,4 +12,10 @@ public interface InventoryQueryService {
     List<Inventory> handle(GetAllItemsQuery query);
     Optional<Inventory> handle(GetItemByIdQuery query);
     List<Inventory> handle(GetItemByBrandQuery query);
+
+    List<Warehouse> handle(GetAllWarehouseQuery query);
+    Optional<Warehouse> handle(GetWarehouseByIdQuery query);
+
+    List<Provider> handle(GetAllProvidersQuery query);
+    Optional<Provider> handle(GetProviderByIdQuery query);
 }
