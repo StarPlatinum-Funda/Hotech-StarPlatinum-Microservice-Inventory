@@ -37,7 +37,7 @@ public class InventoryCommandServiceImpl implements InventoryCommandService {
         if (result.isEmpty()) throw new IllegalArgumentException("Item does not exist");
         var inventoryToUpdate = result.get();
         try {
-            var updatedInventory = itemRepository.save(inventoryToUpdate.updateInformation(command.itemTitle(), command.itemDescription(),command.itemQuantity(),command.brand()));
+            var updatedInventory = itemRepository.save(inventoryToUpdate.updateInformation(command));
             return Optional.of(updatedInventory);
         } catch (Exception e) {
             throw new IllegalArgumentException("Error while updating Inventory: " + e.getMessage());
@@ -56,8 +56,6 @@ public class InventoryCommandServiceImpl implements InventoryCommandService {
         }
 
     }
-
-
 }
 
 

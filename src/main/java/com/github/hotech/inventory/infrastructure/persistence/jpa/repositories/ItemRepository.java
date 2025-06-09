@@ -8,6 +8,6 @@ import java.util.List;
 
 @Repository
 public interface ItemRepository extends JpaRepository<Inventory, Long> {
-    List<Inventory> findAllByBrand(String brand);
+    List<Inventory> findAllByBrandName(String brand);
     boolean existsByProductTitle(String itemName);
 }

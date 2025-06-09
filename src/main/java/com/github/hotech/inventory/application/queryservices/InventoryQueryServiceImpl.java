@@ -32,7 +32,7 @@ public class InventoryQueryServiceImpl implements InventoryQueryService {
     @Override
     public List<Inventory> handle(GetItemByBrandQuery query)
     {
-        return itemRepository.findAllByBrand(query.brandName());
+        return itemRepository.findAllByBrandName(query.brandName());
     }
 
 

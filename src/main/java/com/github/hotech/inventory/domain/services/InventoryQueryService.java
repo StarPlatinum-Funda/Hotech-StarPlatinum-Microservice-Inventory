@@ -12,10 +12,4 @@ public interface InventoryQueryService {
     List<Inventory> handle(GetAllItemsQuery query);
     Optional<Inventory> handle(GetItemByIdQuery query);
     List<Inventory> handle(GetItemByBrandQuery query);
-
-    List<Warehouse> handle(GetAllWarehouseQuery query);
-    Optional<Warehouse> handle(GetWarehouseByIdQuery query);
-
-    List<Provider> handle(GetAllProvidersQuery query);
-    Optional<Provider> handle(GetProviderByIdQuery query);
 }

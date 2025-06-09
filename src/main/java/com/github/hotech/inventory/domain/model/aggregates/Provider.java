@@ -35,6 +35,7 @@ public class Provider extends AbstractAggregateRoot<Provider> {
         this.name = command.name();
         this.ruc = command.ruc();
         this.email = command.email();
+
         return this;
     }
 }
