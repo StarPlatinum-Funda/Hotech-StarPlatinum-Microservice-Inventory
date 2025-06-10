@@ -63,7 +63,6 @@ public class ProviderController {
         return ResponseEntity.ok(resource);
     }
 
-    @Operation(summary = "Updated provider in the path with given data")
     @PutMapping("/{providerId}")
     public ResponseEntity<ProviderResource> updateProvider(@PathVariable Long providerId, @RequestBody UpdateProviderResource resource){
         var command = UpdateProviderCommandFromResourceAssembler.toCommandFromResource(providerId, resource);
