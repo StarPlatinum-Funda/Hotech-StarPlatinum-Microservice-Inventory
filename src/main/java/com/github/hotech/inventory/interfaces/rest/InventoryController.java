@@ -14,6 +14,7 @@ import com.github.hotech.inventory.interfaces.rest.resources.UpdateInventoryReso
 import com.github.hotech.inventory.interfaces.rest.transform.CreateInventoryCommandFromResourceAssembler;
 import com.github.hotech.inventory.interfaces.rest.transform.InventoryResourceFromEntityAssembler;
 import com.github.hotech.inventory.interfaces.rest.transform.UpdateInventoryCommandFromResourceAssembler;
+import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
@@ -37,6 +38,7 @@ public class InventoryController {
         this.inventoryCommandService = inventoryCommandService;
     }
 
+    @Operation(summary = "Create new item im the inventory")
     @PostMapping
     public ResponseEntity<InventoryResource> createItem(
             @RequestBody CreateInventoryResource CreateInventoryResource) {
@@ -48,6 +50,7 @@ public class InventoryController {
                 .orElseGet(() -> ResponseEntity.badRequest().build());
     }
 
+    @Operation(summary = "Recovers all items in the inventory")
     @GetMapping
     public ResponseEntity<List<InventoryResource>> getAllItems() {
         List<Inventory> inventorySource = inventoryQueryService.handle(new GetAllItemsQuery());
@@ -56,6 +59,7 @@ public class InventoryController {
         return ResponseEntity.ok(inventoryResource);
     }
 
+    @Operation(summary = "Recovers all items that belong to the given brand")
     @GetMapping("/brand")
     public ResponseEntity<?> getInventoryByBrand(@RequestParam String brandName) {
         if (brandName == null || brandName.isEmpty()) {
@@ -67,6 +71,7 @@ public class InventoryController {
         return ResponseEntity.ok(inventoryResource);
     }
 
+    @Operation(summary = "Recovers an item with the id given in the path")
     @GetMapping("/{inventoryId}")
     public ResponseEntity<InventoryResource> getInventoryById(@PathVariable Long inventoryId) {
         var GetItemsByIdQuery = new GetItemByIdQuery(inventoryId);
@@ -77,7 +82,7 @@ public class InventoryController {
 
     }
 
-
+    @Operation(summary = "Updates an item in the inventory")
     @PutMapping("/{inventoryId}")
     public ResponseEntity<InventoryResource> updateInventory(@PathVariable Long inventoryId, @RequestBody UpdateInventoryResource updateInventoryResource) {
         var UpdateInventoryCommand = UpdateInventoryCommandFromResourceAssembler.toCommandFromResource(inventoryId, updateInventoryResource);
@@ -88,13 +93,12 @@ public class InventoryController {
         return ResponseEntity.ok(inventoryResource);
     }
 
+    @Operation(summary = "Deletes the item with the id given in the path")
     @DeleteMapping("/{inventoryId}")
     public ResponseEntity<?> deleteInventory(@PathVariable Long inventoryId) {
         var deleteItemsCommand = new DeleteItemsCommand(inventoryId);
         inventoryCommandService.handle(deleteItemsCommand);
         return ResponseEntity.ok("Course with id " + inventoryId + " has been deleted.");
     }
-
-
 }
 

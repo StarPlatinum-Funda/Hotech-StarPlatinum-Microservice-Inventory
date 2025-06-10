@@ -8,6 +8,7 @@ import com.github.hotech.inventory.domain.services.ProviderCommandService;
 import com.github.hotech.inventory.domain.services.ProviderQueryService;
 import com.github.hotech.inventory.interfaces.rest.resources.*;
 import com.github.hotech.inventory.interfaces.rest.transform.*;
+import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
@@ -31,6 +32,7 @@ public class ProviderController {
         this.providerQueryService = providerQueryService;
     }
 
+    @Operation(summary = "Create a new provider for the items")
     @PostMapping
     public ResponseEntity<ProviderResource> createProvider(
             @RequestBody CreateProviderResource createProviderResource) {
@@ -42,6 +44,7 @@ public class ProviderController {
                 .orElseGet(() -> ResponseEntity.badRequest().build());
     }
 
+    @Operation(summary = "Gets lists of all providers")
     @GetMapping
     public ResponseEntity<List<ProviderResource>> getAllProviders() {
         List<Provider> providerSource = providerQueryService.handle(new GetAllProvidersQuery());
@@ -50,6 +53,7 @@ public class ProviderController {
         return ResponseEntity.ok(providerResource);
     }
 
+    @Operation(summary = "Get provider by id in the path")
     @GetMapping("/{providerId}")
     public ResponseEntity<ProviderResource> getProviderById(@PathVariable Long providerId){
         var query = new GetProviderByIdQuery(providerId);
@@ -59,6 +63,7 @@ public class ProviderController {
         return ResponseEntity.ok(resource);
     }
 
+    @Operation(summary = "Updated provider in the path with given data")
     @PutMapping("/{providerId}")
     public ResponseEntity<ProviderResource> updateProvider(@PathVariable Long providerId, @RequestBody UpdateProviderResource resource){
         var command = UpdateProviderCommandFromResourceAssembler.toCommandFromResource(providerId, resource);

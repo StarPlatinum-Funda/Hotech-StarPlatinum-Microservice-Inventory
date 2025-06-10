@@ -11,6 +11,7 @@ import com.github.hotech.inventory.interfaces.rest.resources.UpdateWarehouseReso
 import com.github.hotech.inventory.interfaces.rest.resources.WarehouseResource;
 import com.github.hotech.inventory.interfaces.rest.transform.UpdateWarehouseCommandFromResourceAssembler;
 import com.github.hotech.inventory.interfaces.rest.transform.WarehouseResourceFromEntityAssembler;
+import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
@@ -34,6 +35,7 @@ public class WarehouseController {
         this.warehouseCommandService = warehouseCommandService;
     }
 
+    @Operation(summary = "Creates a new warehouse with an user id of 0")
     @PostMapping
     public ResponseEntity<WarehouseResource> createWarehouse(
             @RequestBody CreateWarehouseResource createWarehouseResource) {
@@ -44,6 +46,7 @@ public class WarehouseController {
                 .orElseGet(() -> ResponseEntity.badRequest().build());
     }
 
+    @Operation(summary = "Recovers all warehouses in the database")
     @GetMapping
     public ResponseEntity<List<WarehouseResource>> getAllWarehouses() {
         List<Warehouse> warehouseSource = warehouseQueryService.handle(new GetAllWarehouseQuery());
@@ -52,6 +55,7 @@ public class WarehouseController {
         return ResponseEntity.ok(warehouseResource);
     }
 
+    @Operation(summary = "Recovers a warehouse with the given idh")
     @GetMapping("/{warehouseId}")
     public ResponseEntity<WarehouseResource> getWarehouseById(@PathVariable Long warehouseId) {
         var GetWarehouseByIdQuery = new GetWarehouseByIdQuery(warehouseId);
@@ -61,6 +65,7 @@ public class WarehouseController {
         return ResponseEntity.ok(warehouseResource);
     }
 
+    @Operation(summary = "updates a warehouse data")
     @PutMapping("/{warehouseId}")
     public ResponseEntity<WarehouseResource> updateWarehouse(@PathVariable Long warehouseId, @RequestBody UpdateWarehouseResource resource){
         var updateWarehouseCommand = UpdateWarehouseCommandFromResourceAssembler.toCommandFromResource(warehouseId, resource);
